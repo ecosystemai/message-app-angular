@@ -1,0 +1,87 @@
+/* Container styling */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Card styling */
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Header styling */
+.card-header {
+  background-color: #007bff; /* Primary color */
+  color: #ffffff;
+  padding: 15px;
+  font-size: 1.5em;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Form input styling */
+.form-group label {
+  font-weight: 500;
+  color: #555;
+}
+
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Button styling */
+.btn-success {
+  background-color: #007bff; /* Updated to blue */
+  border-color: #007bff;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.btn-success:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.btn-primary.btn-sm {
+  padding: 5px 15px;
+  font-size: 0.9em;
+}
+
+.btn-primary.btn-sm:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+/* Alert styling */
+.alert {
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+/* List styling */
+.list-group-item {
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-bottom: 8px;
+}
+
+.list-group-item button {
+  font-size: 0.9em;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}

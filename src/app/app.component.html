@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">Message App</h2>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onFetchMessages()">
+        <div class="form-group">
+          <label for="customerNumber">Customer Number:</label>
+          <input
+            id="customerNumber"
+            type="text"
+            class="form-control"
+            [(ngModel)]="customerNumber"
+            name="customerNumber"
+            placeholder="Enter customer number"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-success mt-3">Fetch Messages</button>
+      </form>
+      <div *ngIf="error" class="alert alert-danger mt-3">
+        {{ error }}
+      </div>
+      <div *ngIf="success" class="alert alert-success mt-3">
+        {{ success }}
+      </div>
+      <ul *ngIf="messages.length > 0" class="list-group mt-3">
+        <li *ngFor="let message of messages" class="list-group-item d-flex justify-content-between align-items-center">
+          {{ message.offer }}
+          <button class="btn btn-primary btn-sm" (click)="onAcceptMessage(message)">Accept</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
