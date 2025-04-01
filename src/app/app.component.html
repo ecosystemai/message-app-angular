@@ -1,8 +1,13 @@
 <div class="container mt-5">
   <div class="card">
-    <div class="card-header bg-primary text-white">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
       <h2 class="mb-0">Message App</h2>
+      <!-- Three dots icon button -->
+      <button type="button" class="btn btn-sm text-white" (click)="showAdmin = !showAdmin" title="Admin Settings">
+        &#x22EE;
+      </button>
     </div>
+
     <div class="card-body">
       <form (ngSubmit)="onFetchMessages()">
         <div class="form-group">
@@ -17,14 +22,61 @@
             required
           />
         </div>
+
+        <!-- Admin section shown only when toggled -->
+        <div *ngIf="showAdmin">
+          <hr class="my-4">
+          <h5>Admin: Update API URLs</h5>
+
+          <div class="form-group">
+            <label for="messagesApiUrl">Messages API URL:</label>
+            <input
+              id="messagesApiUrl"
+              type="text"
+              class="form-control"
+              [(ngModel)]="messagesApiUrl"
+              name="messagesApiUrl"
+              placeholder="https://bankruntime8.ecosystem.ai/invocations"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="personalityApiUrl">Personality API URL:</label>
+            <input
+              id="personalityApiUrl"
+              type="text"
+              class="form-control"
+              [(ngModel)]="personalityApiUrl"
+              name="personalityApiUrl"
+              placeholder="https://bankruntime2.ecosystem.ai/invocations"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="acceptanceApiUrl">Acceptance API URL:</label>
+            <input
+              id="acceptanceApiUrl"
+              type="text"
+              class="form-control"
+              [(ngModel)]="acceptanceApiUrl"
+              name="acceptanceApiUrl"
+              placeholder="https://bankruntime8.ecosystem.ai/response"
+            />
+          </div>
+
+          <button type="button" class="btn btn-warning mt-3 me-2" (click)="onUpdateUrls()">Update URLs</button>
+        </div>
+
         <button type="submit" class="btn btn-success mt-3">Fetch Messages</button>
       </form>
+
       <div *ngIf="error" class="alert alert-danger mt-3">
         {{ error }}
       </div>
       <div *ngIf="success" class="alert alert-success mt-3">
         {{ success }}
       </div>
+
       <ul *ngIf="messages.length > 0" class="list-group mt-3">
         <li *ngFor="let message of messages" class="list-group-item d-flex justify-content-between align-items-center">
           {{ message.offer }}

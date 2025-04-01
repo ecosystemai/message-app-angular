@@ -1,0 +1,10 @@
+services:
+  ecosystem-angular:
+    container_name: ecosystem-angular
+    image: ecosystemai/ecosystem-angular:arm64
+    ports:
+      - "82:80"
+
+networks:
+  ecosystem:
+    external: true

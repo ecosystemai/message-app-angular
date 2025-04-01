@@ -7,11 +7,24 @@ import { catchError, map, switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class MessageService {
-  private messagesApiUrl = 'http://localhost:8098/invocations'; // Messages API endpoint
-  private personalityApiUrl = 'http://localhost:8092/invocations'; // Personality API endpoint
-  private acceptanceApiUrl = 'http://localhost:8098/response'; // Acceptance API endpoint
+  // admin option to update these
+  private messagesApiUrl = 'https://bankruntime8.ecosystem.ai/invocations'; // Messages API endpoint
+  private personalityApiUrl = 'https://bankruntime2.ecosystem.ai/invocations'; // Personality API endpoint
+  private acceptanceApiUrl = 'https://bankruntime8.ecosystem.ai/response'; // Acceptance API endpoint
 
   constructor(private http: HttpClient) { }
+
+  updateMessagesApiUrl(url: string) {
+    this.messagesApiUrl = url;
+  }
+
+  updatePersonalityApiUrl(url: string) {
+    this.personalityApiUrl = url;
+  }
+
+  updateAcceptanceApiUrl(url: string) {
+    this.acceptanceApiUrl = url;
+  }
 
   // Fetch personality based on customer number
   private fetchPersonality(customerNumber: string): Observable<string> {

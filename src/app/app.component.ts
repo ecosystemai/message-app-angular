@@ -13,6 +13,12 @@ export class AppComponent {
   error: string | null = null;
   success: string | null = null;
 
+  messagesApiUrl = '';
+  personalityApiUrl = '';
+  acceptanceApiUrl = '';
+
+  showAdmin = false;
+
   constructor(private messageService: MessageService) { }
 
   onFetchMessages(): void {
@@ -49,5 +55,12 @@ export class AppComponent {
         console.error(err);
       }
     });
+  }
+
+  onUpdateUrls() {
+    this.messageService.updateMessagesApiUrl(this.messagesApiUrl || 'https://bankruntime8.ecosystem.ai/invocations');
+    this.messageService.updatePersonalityApiUrl(this.personalityApiUrl || 'https://bankruntime2.ecosystem.ai/invocations');
+    this.messageService.updateAcceptanceApiUrl(this.acceptanceApiUrl || 'https://bankruntime8.ecosystem.ai/response');
+    this.success = 'API URLs updated successfully';
   }
 }
