@@ -13,9 +13,9 @@ export class AppComponent {
   error: string | null = null;
   success: string | null = null;
 
-  messagesApiUrl = '';
-  personalityApiUrl = '';
-  acceptanceApiUrl = '';
+  messagesApiUrl = 'https://bankruntime8.ecosystem.ai/invocations';
+  personalityApiUrl = 'https://bankruntime2.ecosystem.ai/invocations';
+  acceptanceApiUrl = 'https://bankruntime8.ecosystem.ai/response';
 
   showAdmin = false;
 
@@ -26,8 +26,8 @@ export class AppComponent {
       this.error = 'Customer number is required';
       return;
     }
-    this.error = null; // Clear previous errors
-    this.success = null; // Clear previous success messages
+    this.error = null;
+    this.success = null;
     this.messageService.fetchMessages(this.customerNumber).subscribe({
       next: (response) => {
         this.messages = response.final_result.map((item: any) => ({
@@ -44,8 +44,8 @@ export class AppComponent {
   }
 
   onAcceptMessage(message: any): void {
-    this.error = null; // Clear previous errors
-    this.success = null; // Clear previous success messages
+    this.error = null;
+    this.success = null;
     this.messageService.acceptMessage(message.uuid, message.offerName).subscribe({
       next: () => {
         this.success = 'Message accepted successfully';
@@ -58,9 +58,9 @@ export class AppComponent {
   }
 
   onUpdateUrls() {
-    this.messageService.updateMessagesApiUrl(this.messagesApiUrl || 'https://bankruntime8.ecosystem.ai/invocations');
-    this.messageService.updatePersonalityApiUrl(this.personalityApiUrl || 'https://bankruntime2.ecosystem.ai/invocations');
-    this.messageService.updateAcceptanceApiUrl(this.acceptanceApiUrl || 'https://bankruntime8.ecosystem.ai/response');
+    this.messageService.updateMessagesApiUrl(this.messagesApiUrl);
+    this.messageService.updatePersonalityApiUrl(this.personalityApiUrl);
+    this.messageService.updateAcceptanceApiUrl(this.acceptanceApiUrl);
     this.success = 'API URLs updated successfully';
   }
 }
