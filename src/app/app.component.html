@@ -67,6 +67,15 @@
           <button type="button" class="btn btn-warning mt-3 me-2" (click)="onUpdateUrls()">Update URLs</button>
         </div>
 
+        <div *ngIf="customer_explanation" class="card bg-light border-info mt-4">
+          <div class="card-header text-info font-weight-bold">
+            Customer Explanation
+          </div>
+          <div class="card-body">
+            <p class="card-text mb-0">{{ customer_explanation }}</p>
+          </div>
+        </div>
+
         <button type="submit" class="btn btn-success mt-3">Fetch Messages</button>
       </form>
 

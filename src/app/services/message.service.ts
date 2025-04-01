@@ -27,7 +27,7 @@ export class MessageService {
   }
 
   // Fetch personality based on customer number
-  private fetchPersonality(customerNumber: string): Observable<string> {
+  private fetchPersonality(customerNumber: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = {
       campaign: 'spend_personality',
@@ -46,7 +46,8 @@ export class MessageService {
             throw new Error('Personality not found in response');
           }
           console.log(`Personality for customer ${customerNumber}: ${personality}`);
-          return personality;
+          console.log('Details: ', response.final_result[0]);
+          return response.final_result[0]?.result_full;
         }),
         catchError(error => {
           console.error('Error fetching personality:', error);
@@ -59,8 +60,9 @@ export class MessageService {
   fetchMessages(customerNumber: string): Observable<any> {
     console.log(`Fetching messages for customer ${customerNumber}`);
     return this.fetchPersonality(customerNumber).pipe(
-      switchMap(personality => {
+      switchMap(personalityObj => {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        const personality = personalityObj.trait;
         const body = {
           campaign: 'budget_messages',
           subcampaign: 'none',
@@ -73,7 +75,13 @@ export class MessageService {
             value: [personality, '']
           })
         };
-        return this.http.post<any>(this.messagesApiUrl, body, { headers });
+        // return this.http.post<any>(this.messagesApiUrl, body, { headers });
+        return this.http.post<any>(this.messagesApiUrl, body, { headers }).pipe(
+          map(messagesResponse => ({
+            personality: personalityObj,
+            messages: messagesResponse
+          }))
+        );
       }),
       catchError(error => {
         console.error('Error fetching messages:', error);

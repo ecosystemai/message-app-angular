@@ -18,6 +18,7 @@ export class AppComponent {
   acceptanceApiUrl = 'https://bankruntime8.ecosystem.ai/response';
 
   showAdmin = false;
+  customer_explanation = '';
 
   constructor(private messageService: MessageService) { }
 
@@ -30,11 +31,13 @@ export class AppComponent {
     this.success = null;
     this.messageService.fetchMessages(this.customerNumber).subscribe({
       next: (response) => {
-        this.messages = response.final_result.map((item: any) => ({
+        this.messages = response.messages.final_result.map((item: any) => ({
           offer: item.result.offer,
           uuid: item.result.uuid,
           offerName: item.result.offer_name
         }));
+        // add this if generative engine added additional details
+        this.customer_explanation = response.personality.additional_details;
       },
       error: (err) => {
         this.error = err.message;
